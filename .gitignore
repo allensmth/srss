@@ -2,3 +2,4 @@ venv/
 static/.webassets-cache/
 static/dist/
 node_modules/
+package-lock.json
