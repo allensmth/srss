@@ -1,131 +1,95 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main class="max-w-screen-md mx-auto flex flex-col gap-8">
-  <div class="w-full max-w-screen-md mx-auto">
-    <header class="w-full flex items-center p-8" hx-boost="true">
-      </h1>
-      <a href="/" class="btn btn-secondary btn-outline">Home</a>
-      </h1>
-    </header>
+<div class="container mx-auto p-2 md:p-4">
+      <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
+          <div class="post-item p-4">
+              <div class="flex items-center mb-2">
+                  <div class="avatar mr-2">
+                      <div class="w-6 h-6 rounded-full">
+                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=HK" alt="Avatar" />
+                      </div>
+                  </div>
+                  <span class="text-sm text-base-content/70">
+                      r/HongKong • Posted by u/HKUser • 6 hr. ago
+                  </span>
+              </div>
+              <h2 class="text-lg font-semibold mb-2">Denied entry to HK</h2>
+              <p class="text-sm mb-3">A little vent. My two cousins, one is a nurse and one is head of HR for an international phone call centre, flew into HK last night but were denied entry only saying the 'do not meet the requirements needed for entry'...</p>
+              <div class="flex items-center space-x-4 text-sm">
+                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                      <span id="vote-count-1">122</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                      <span>89 Comments</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                      <span>Share</span>
+                  </button>
+              </div>
+          </div>
+
+          <div class="post-item p-4">
+              <div class="flex items-center mb-2">
+                  <div class="avatar mr-2">
+                      <div class="w-6 h-6 rounded-full">
+                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=WD" alt="Avatar" />
+                      </div>
+                  </div>
+                  <span class="text-sm text-base-content/70">
+                      r/webdev • Posted by u/WebDeveloper • 1 day ago
+                  </span>
+              </div>
+              <h2 class="text-lg font-semibold mb-2">What method do you use to deploy websites, and why?</h2>
+              <p class="text-sm mb-3">Hey everyone! I'm curious about the different methods people use to deploy websites. There are so many options out there—cloud services, CI/CD pipelines, FTP, etc.—each with its pros and cons...</p>
+              <img src="/placeholder.svg?height=200&width=400" alt="Deployment methods" class="w-full h-40 object-cover rounded-lg mb-3">
+              <div class="flex items-center space-x-4 text-sm">
+                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-2">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                      <span id="vote-count-2">53</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                      <span>183 Comments</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                      <span>Share</span>
+                  </button>
+              </div>
+          </div>
+
+          <div class="post-item p-4">
+              <div class="flex items-center mb-2">
+                  <div class="avatar mr-2">
+                      <div class="w-6 h-6 rounded-full">
+                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=DE" alt="Avatar" />
+                      </div>
+                  </div>
+                  <span class="text-sm text-base-content/70">
+                      r/django • Posted by u/DjangoEnthusiast • 14 hr. ago
+                  </span>
+              </div>
+              <h2 class="text-lg font-semibold mb-2">Is async django ready for prime time? Our async django production experience</h2>
+              <p class="text-sm mb-3">We have traditionally used Django in all our products. We believe it is one of the most underrated, beautifully designed, rock solid framework out there. However, if we are to be honest, the history of async usage in Django wasn't very impressive...</p>
+              <div class="flex items-center space-x-4 text-sm">
+                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-3">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                      <span id="vote-count-3">77</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                      <span>23 Comments</span>
+                  </button>
+                  <button class="flex items-center space-x-1">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                      <span>Share</span>
+                  </button>
+              </div>
+          </div>
+      </div>
   </div>
-  <section>
-    <div class="flex flex-col gap-8">
-      <section class="hero bg-base-200 px-16 sm:px-32 py-24 sm:rounded-3xl">
-        <div class="hero-content text-center">
-          <div class="flex flex-col gap-6">
-            <h1 class="text-4xl font-bold">
-              Flask Htmlx daisyUI Demo
-            </h1>
-            <p class="text-lg">
-              This is an simple demo of Flask and it's built in HTTP server app using Htmlx, TailwindCSS and DaisyUI.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="hero bg-base-200 px-16 sm:px-32 py-24 sm:rounded-3xl">
-        <div class="hero-content text-left">
-          <div class="flex flex-col gap-6">
-            <h1 class="text-4xl font-bold">Search Contacts
-              <span class="htmx-indicator">
-                <img src="{{url_for('static', filename='img/bars.svg')}}" /> Searching...
-              </span>
-            </h1>
-            <input class="form-control input input-bordered input-md w-full max-w-xs" type="text" name="search"
-              placeholder="Begin Typing To Search Users..." hx-post="/search" hx-trigger="keyup changed delay:250ms"
-              hx-target="#search-results" hx-indicator=".htmx-indicator">
-
-            <table class="table table-xs">
-              <thead>
-                <tr>
-                  <th>ID
-                  </th>
-                  <th>First
-                    Name</th>
-                  <th>Last
-                    Name</th>
-                  <th>Email
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody id="search-results">
-                {% include 'search.html' %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section class="hero bg-base-200 px-16 sm:px-32 py-24 sm:rounded-3xl">
-        <div
-          class="flex flex-col w-full max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-          <div class="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
-            Login To Your Account
-          </div>
-          <div class="mt-8">
-            <form action="#" autoComplete="off">
-              <div class="flex flex-col mb-2">
-                <div class="flex relative ">
-                  <span
-                    class="rounded-l-md inline-flex  items-center px-3">
-                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M1792 710v794q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-794q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38-42.5-30.5q-91-64-262-182.5t-205-142.5q-62-42-117-115.5t-55-136.5q0-78 41.5-130t118.5-52h1472q65 0 112.5 47t47.5 113z">
-                      </path>
-                    </svg>
-                  </span>
-                  <input type="text" id="sign-in-email"
-                    class="input input-bordered input-md w-full max-w-xs"
-                    placeholder="Your email" />
-                </div>
-              </div>
-              <div class="flex flex-col mb-6">
-                <div class="flex relative ">
-                  <span
-                    class="rounded-l-md inline-flex  items-center px-3">
-                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M1376 768q40 0 68 28t28 68v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-320q0-185 131.5-316.5t316.5-131.5 316.5 131.5 131.5 316.5q0 26-19 45t-45 19h-64q-26 0-45-19t-19-45q0-106-75-181t-181-75-181 75-75 181v320h736z">
-                      </path>
-                    </svg>
-                  </span>
-                  <input type="password" id="sign-in-email"
-                    class="input input-bordered input-md w-full max-w-xs"
-                    placeholder="Your password" />
-                </div>
-              </div>
-              <div class="flex items-center mb-6 -mt-4">
-                <div class="flex ml-auto">
-                  <a href="#"
-                    class="link link-hover">
-                    Forgot Your Password?
-                  </a>
-                </div>
-              </div>
-              <div class="flex w-full">
-                <button type="submit" class="btn btn-secondary btn-outline">
-                  Login
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="flex items-center justify-center mt-6">
-            <a href="#" target="_blank"
-              class="link link-hover">
-              <span class="ml-2">
-                You don&#x27;t have an account?
-              </span>
-            </a>
-          </div>
-        </div>
-
-      </section>
-    </div>
-  </section>
-</main>
 {% endblock content %}
