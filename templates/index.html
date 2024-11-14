@@ -2,94 +2,59 @@
 
 {% block content %}
 <div class="container mx-auto p-2 md:p-4">
-      <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
-          <div class="post-item p-4">
-              <div class="flex items-center mb-2">
-                  <div class="avatar mr-2">
-                      <div class="w-6 h-6 rounded-full">
-                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=HK" alt="Avatar" />
-                      </div>
-                  </div>
-                  <span class="text-sm text-base-content/70">
-                      r/HongKong • Posted by u/HKUser • 6 hr. ago
-                  </span>
-              </div>
-              <h2 class="text-lg font-semibold mb-2">Denied entry to HK</h2>
-              <p class="text-sm mb-3">A little vent. My two cousins, one is a nurse and one is head of HR for an international phone call centre, flew into HK last night but were denied entry only saying the 'do not meet the requirements needed for entry'...</p>
-              <div class="flex items-center space-x-4 text-sm">
-                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-                      <span id="vote-count-1">122</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                      <span>89 Comments</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-                      <span>Share</span>
-                  </button>
-              </div>
-          </div>
-
-          <div class="post-item p-4">
-              <div class="flex items-center mb-2">
-                  <div class="avatar mr-2">
-                      <div class="w-6 h-6 rounded-full">
-                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=WD" alt="Avatar" />
-                      </div>
-                  </div>
-                  <span class="text-sm text-base-content/70">
-                      r/webdev • Posted by u/WebDeveloper • 1 day ago
-                  </span>
-              </div>
-              <h2 class="text-lg font-semibold mb-2">What method do you use to deploy websites, and why?</h2>
-              <p class="text-sm mb-3">Hey everyone! I'm curious about the different methods people use to deploy websites. There are so many options out there—cloud services, CI/CD pipelines, FTP, etc.—each with its pros and cons...</p>
-              <img src="/placeholder.svg?height=200&width=400" alt="Deployment methods" class="w-full h-40 object-cover rounded-lg mb-3">
-              <div class="flex items-center space-x-4 text-sm">
-                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-2">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-                      <span id="vote-count-2">53</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                      <span>183 Comments</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-                      <span>Share</span>
-                  </button>
-              </div>
-          </div>
-
-          <div class="post-item p-4">
-              <div class="flex items-center mb-2">
-                  <div class="avatar mr-2">
-                      <div class="w-6 h-6 rounded-full">
-                          <img src="https://api.dicebear.com/6.x/initials/svg?seed=DE" alt="Avatar" />
-                      </div>
-                  </div>
-                  <span class="text-sm text-base-content/70">
-                      r/django • Posted by u/DjangoEnthusiast • 14 hr. ago
-                  </span>
-              </div>
-              <h2 class="text-lg font-semibold mb-2">Is async django ready for prime time? Our async django production experience</h2>
-              <p class="text-sm mb-3">We have traditionally used Django in all our products. We believe it is one of the most underrated, beautifully designed, rock solid framework out there. However, if we are to be honest, the history of async usage in Django wasn't very impressive...</p>
-              <div class="flex items-center space-x-4 text-sm">
-                  <button class="flex items-center space-x-1" hx-post="/upvote" hx-trigger="click" hx-swap="innerHTML" hx-target="#vote-count-3">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-                      <span id="vote-count-3">77</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
-                      <span>23 Comments</span>
-                  </button>
-                  <button class="flex items-center space-x-1">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-                      <span>Share</span>
-                  </button>
-              </div>
-          </div>
+  <div class="bg-base-100 rounded-lg overflow-hidden mb-4 p-4">
+      <div class="flex flex-wrap gap-2" id="filter-tags">
+          <span class="tag active" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "all"}'>全部</span>
+          <span class="tag" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Discussion"}'>讨论</span>
+          <span class="tag" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Question"}'>问题</span>
+          <span class="tag" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Travel"}'>旅行</span>
+          <span class="tag" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Web Dev"}'>Web开发</span>
+          <span class="tag" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Django"}'>Django</span>
       </div>
   </div>
+  <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
+      <div class="post-item p-4">
+          <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2">
+                  <span class="tag">u/HKUser</span>
+                  <span class="text-sm text-base-content/70">• 6 hr. ago</span>
+              </div>
+              <div class="flex space-x-2">
+                  <span class="tag">Discussion</span>
+                  <span class="tag">Travel</span>
+              </div>
+          </div>
+          <p class="text-sm">A little vent. My two cousins, one is a nurse and one is head of HR for an international phone call centre, flew into HK last night but were denied entry only saying the 'do not meet the requirements needed for entry'. Officers refused to specify what documents or requirements they are lacking and told them they will be sent back on the next flight available to their country of origin. The officers refused to speak with them any further. My cousins are transwomen from the Philippines, and both are well-travelled. Just this year, they went to Vietnam, Taiwan, and Bali. They earn decent money and own property. They called me from where they are being detained, both feeling frustrated and discriminated against. Here's the (even more) funny part, two other transwomen are also in the holding room. One was on a previous flight from Thailand, and the other was on the same flight as my cousins. All denied entry to HK. What's up with this???? I know there is very little anyone can do once an immigration officer has decided to deny you entry, but is being trans one of these reasons? Just frustrating that they refused to elaborate on the reasons</p>
+      </div>
+
+      <div class="post-item p-4">
+          <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2">
+                  <span class="tag">u/WebDeveloper</span>
+                  <span class="text-sm text-base-content/70">• 1 day ago</span>
+              </div>
+              <div class="flex space-x-2">
+                  <span class="tag">Question</span>
+                  <span class="tag">Web Dev</span>
+              </div>
+          </div>
+          <p class="text-sm mb-3">Hey everyone! I'm curious about the different methods people use to deploy websites. There are so many options out there—cloud services, CI/CD pipelines, FTP, etc.—each with its pros and cons. What's your deployment method, and why did you choose it? Any tips or best practices you'd recommend? Thanks!</p>
+          <img src="/placeholder.svg?height=200&width=400" alt="Deployment methods" class="w-full h-40 object-cover rounded-lg">
+      </div>
+
+      <div class="post-item p-4">
+          <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2">
+                  <span class="tag">u/DjangoEnthusiast</span>
+                  <span class="text-sm text-base-content/70">• 14 hr. ago</span>
+              </div>
+              <div class="flex space-x-2">
+                  <span class="tag">Discussion</span>
+                  <span class="tag">Django</span>
+              </div>
+          </div>
+          <p class="text-sm">We have traditionally used Django in all our products. We believe it is one of the most underrated, beautifully designed, rock solid framework out there. However, if we are to be honest, the history of async usage in Django wasn't very impressive. You could argue that for most products, you don't really need async. It was just an extra layer of complexity without any significant practical benefit. Over the last couple of years, AI use-cases have changed that perception. Many AI products have calling external APIs over the network as their bottleneck. This makes the complexity from async Python worth considering. FastAPI with its intuitive async usage and simplicity have risen to be the default API/web layer for AI projects. I wrote about using async Django in a relatively complex AI open source project here: https://jonathanadly.com/is-async-django-ready-for-prime-time tldr: Async django is ready! there is a couple of gotcha's here and there, but there should be no performance loss when using async Django instead of FastAPI for the same tasks. Django's built-in features greatly simplify and enhance the developer experience. So - go ahead and use async Django in your next project. It should be a lot smoother that it was a year or even six months ago.</p>
+      </div>
+  </div>
+</div>
 {% endblock content %}
