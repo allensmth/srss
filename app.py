@@ -49,11 +49,25 @@ users = [
 ]
 
 
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
+app = Flask(__name__)
+app.config.from_object('config.Config')
+db = SQLAlchemy(app)
 
-@app.route("/")
+class RSS(db.Model):
+    __tablename__ = 'rss'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String, nullable=False)
+    author = db.Column(db.String, nullable=False)
+    label = db.Column(db.String, nullable=True)
+    created_at = db.Column(db.Time, nullable=True)
+
+@app.route('/')
 def index():
-    return render_template("index.html")
+    rss_items = RSS.query.all()
+    return render_template('index.html', rss_items=rss_items)
 
 @app.route("/search", methods=["POST"])
 def search():
