@@ -121,17 +121,18 @@ body {
         const newItem = document.createElement('div');
         newItem.className = 'post-item p-4';
         newItem.innerHTML = `
+         <div class="post-item bg-white p-4 ">
             <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center space-x-2">
                     <span class="tag">${data.author}</span>
-                    <span class="text-sm text-base-content/70">${data.created_at}</span>
+                <span class="text-sm text-base-content/70">${data.created_at}</span>
                 </div>
                 <div class="flex space-x-2">
                     <span class="tag">${data.label}</span>
-                    <span class="tag">Travel</span>
                 </div>
             </div>
-            <p class="text-sm">${data.content}</p>
+            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">${data.content}</p>
+        </div>
         `;
         postList.prepend(newItem);
     });
