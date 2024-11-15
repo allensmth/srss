@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 {% block content %}
 <div class="container mx-auto p-2 md:p-4">
   <div class="bg-base-100 rounded-lg overflow-hidden mb-4 p-4">
@@ -32,4 +32,27 @@
   
   </div>
 </div>
+<script>
+    const socket = io();
+
+    socket.on('new_rss', function(data) {
+        const postList = document.getElementById('post-list');
+        const newItem = document.createElement('div');
+        newItem.className = 'post-item p-4';
+        newItem.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                    <span class="tag">${data.author}</span>
+                    <span class="text-sm text-base-content/70">${data.created_at}</span>
+                </div>
+                <div class="flex space-x-2">
+                    <span class="tag">${data.label}</span>
+                    <span class="tag">Travel</span>
+                </div>
+            </div>
+            <p class="text-sm">${data.content}</p>
+        `;
+        postList.prepend(newItem);
+    });
+</script>
 {% endblock content %}
