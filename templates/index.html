@@ -91,7 +91,7 @@ body {
                     <span class="tag">{{ item.label }}</span>
                 </div>
             </div>
-            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">{{ item.content }}</p>
+            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">{{ item.content | safe}}</p>
         </div>
         {% endfor %}
     </div>
