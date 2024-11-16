@@ -5,7 +5,6 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
-# 加载环境变量
 load_dotenv()
 
 app = Flask(__name__)
@@ -24,7 +23,9 @@ class RSS(db.Model):
 @app.route('/')
 def index():
     rss_items = RSS.query.all()
-    return render_template('index.html', rss_items=rss_items)
+    authors = db.session.query(RSS.author).distinct().all()
+    authors = [author[0] for author in authors]  # 提取作者名
+    return render_template('index.html', rss_items=rss_items, authors=authors)
 
 @app.route('/add_rss', methods=['POST'])
 def add_rss():
@@ -41,7 +42,6 @@ def add_rss():
     db.session.add(new_rss)
     db.session.commit()
 
-    # 通过 WebSocket 通知客户端
     socketio.emit('new_rss', {
         'id': new_rss.id,
         'content': new_rss.content,
@@ -52,20 +52,20 @@ def add_rss():
 
     return jsonify({'message': 'RSS item added successfully'}), 201
 
-@app.route('/search_rss', methods=['GET'])
+@app.route('/filter', methods=['GET'])
 def search_rss():
-    label = request.args.get('label')
-    if not label:
+    author = request.args.get('author')
+    if not author:
         return jsonify({'error': 'Label is required'}), 400
-
-    rss_items = RSS.query.filter_by(label=label).all()
-    return jsonify([{
-        'id': item.id,
-        'content': item.content,
-        'author': item.author,
-        'label': item.label,
-        'created_at': item.created_at.strftime('%Y-%m-%d %H:%M:%S')
-    } for item in rss_items])
+    if author == 'all':
+        rss_items = RSS.query.all()
+    else: 
+        rss_items = RSS.query.filter_by(author=author).all()
+    
+    authors = db.session.query(RSS.author).distinct().all()
+    authors = [author[0] for author in authors]  # 提取作者名
+    
+    return render_template('post_list.html', current_author = author,   rss_items=rss_items, authors=authors)
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000 , debug=True)

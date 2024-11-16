@@ -61,39 +61,29 @@ body {
                 font-size: 0.875rem;
             }
         }
+        .btn-active {
+    background-color: #9a6395; /* 绿色背景 */
+    color: white;
+}
+
+.btn-ghost {
+    background-color: transparent;
+}
     
 </style>
 <div class="container mx-auto p-2 md:p-4">
     
         <div class="sticky-tags filter-container px-3 py-2">
             <div class="flex flex-wrap -mx-1" id="filter-tags">
-                <button class="tagbtn active" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "all"}'>全部</button>
-                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Discussion"}'>讨论</button>
-                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Question"}'>问题</button>
-                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Travel"}'>旅行</button>
-                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Web Dev"}'>Web开发</button>
-                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Django"}'>Django</button>
+                <button class="tagbtn btn-active" data-tag="all" hx-get="/filter?author=all" hx-target="#post-list">全部</button>
+                {% for author in authors %}
+                <button class="tagbtn {% if current_author == author %}active{% endif %}" data-tag="{{ author }}" hx-get="/filter?author={{ author }}" hx-target="#post-list">{{ author }}</button>
+                {% endfor %}
             </div>
         </div>
         
-    
-
     <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
-        {% for item in rss_items %}
-        
-        <div class="post-item bg-white p-4 ">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center space-x-2">
-                    <span class="tag">{{ item.author }}</span>
-                <span class="text-sm text-base-content/70">{{ item.created_at.strftime(' %H:%M / %m-%d') }}</span>
-                </div>
-                <div class="flex space-x-2">
-                    <span class="tag">{{ item.label }}</span>
-                </div>
-            </div>
-            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">{{ item.content | safe}}</p>
-        </div>
-        {% endfor %}
+        {% include 'post_list.html' %}
     </div>
 </div>
 <script>
@@ -102,9 +92,9 @@ body {
                 event.detail.headers['Content-Type'] = 'application/json';
             });
 
-            document.querySelectorAll('#filter-tags .btn').forEach(btn => {
+            document.querySelectorAll('.tagbtn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('#filter-tags .btn').forEach(b => {
+                    document.querySelectorAll('.tagbtn').forEach(b => {
                         b.classList.remove('btn-active');
                         b.classList.add('btn-ghost');
                     });
