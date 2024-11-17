@@ -47,7 +47,7 @@ def add_rss():
         'content': new_rss.content,
         'author': new_rss.author,
         'label': new_rss.label,
-        'created_at': new_rss.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        'created_at': new_rss.created_at
     })
 
     return jsonify({'message': 'RSS item added successfully'}), 201
