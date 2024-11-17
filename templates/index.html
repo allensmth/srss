@@ -5,108 +5,62 @@
     .sticky-tags {
         position: sticky;
         top: 0;
-        background-color: white; /* 背景颜色，确保内容在滚动时可见 */
-        z-index: 1000; /* 确保标签在其他内容之上 */
-        padding: 10px 0; /* 添加一些内边距 */
+        z-index: 1000;
+        /* 确保标签在其他内容之上 */
+        padding: 10px 0;
+        /* 添加一些内边距 */
     }
-/* 使用系统字体作为降级方案 */
-body {
-    font-family: 'Source Han Sans CN', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-        }
 
-    .post-item:not(:last-child) {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .tagbtn {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            padding: 0.35rem 0.75rem;
-            border-radius: 4px;
-            background-color: #f5f5f5;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-            margin-right: 0.35rem;
-            margin-bottom: 0.35rem;
-            line-height: 1.2;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tagbtn:hover {
-            background-color: #eee;
-            color: #444;
-        }
-        .tagbtn.active {
-            background-color: #fff;
-            color: #333;
-            border-color: #e5e5e5;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-        .filter-container {
-            background: #fff;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .post-item:not(:last-child) {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        @media (max-width: 640px) {
-            .tagbtn {
-                font-size: 0.875rem;
-            }
-        }
-        .btn-active {
-    background-color: #9a6395; /* 绿色背景 */
-    color: white;
-}
-
-.btn-ghost {
-    background-color: transparent;
-}
-    
+    /* 使用系统字体作为降级方案 */
 </style>
+
 <div class="container mx-auto p-2 md:p-4">
-    
-        <div class="sticky-tags filter-container px-3 py-2">
-            <div class="flex flex-wrap -mx-1" id="filter-tags">
-                <button class="tagbtn btn-active" data-tag="all" hx-get="/filter?author=all" hx-target="#post-list">全部</button>
-                {% for author in authors %}
-                <button class="tagbtn {% if current_author == author %}active{% endif %}" data-tag="{{ author }}" hx-get="/filter?author={{ author }}" hx-target="#post-list">{{ author }}</button>
-                {% endfor %}
-            </div>
+    <form id="filter-form" class="sticky-tags flex flex-row" hx-post="/filter" hx-target="#post-list">
+        <div class="basis-[90%] flex flex-wrap gap-2">
+            <button type="submit" class="btn btn-active" data-author="all" hx-trigger="click" hx-include="#filter-form">all</button>
+            {% for author in authors %}
+            <button type="button" class="btn btn-ghost" data-author="{{ author }}" hx-trigger="click" hx-include="#filter-form">{{ author }}</button>
+            {% endfor %}
         </div>
-        
+        <div class="basis-[10%] flex items-center justify-center">
+            <span class="icon-idea p-1"></span>
+            <input type="checkbox" name="label" value="idea" class="toggle" />
+        </div>
+        <input type="hidden" name="author" id="author-input" value="all">
+    </form>
+
     <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
         {% include 'post_list.html' %}
     </div>
 </div>
 <script>
-    htmx.onLoad(function() {
+    htmx.onLoad(function () {
             document.body.addEventListener('htmx:configRequest', (event) => {
-                event.detail.headers['Content-Type'] = 'application/json';
+                event.detail.headers['Content-Type'] = 'application/x-www-form-urlencoded';
             });
+            htmx.logAll();
 
-            document.querySelectorAll('.tagbtn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.tagbtn').forEach(b => {
+            document.querySelectorAll('button[data-author]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('button[data-author]').forEach(b => {
                         b.classList.remove('btn-active');
                         b.classList.add('btn-ghost');
                     });
                     this.classList.remove('btn-ghost');
                     this.classList.add('btn-active');
+                    document.getElementById('author-input').value = this.getAttribute('data-author');
+                    htmx.trigger('#filter-form', 'submit');
                 });
             });
-        });
 
+            document.querySelector('.toggle').addEventListener('change', function () {
+                htmx.trigger('#filter-form', 'submit');
+            });
+        });
+    
     const socket = io();
 
-    socket.on('new_rss', function(data) {
+    socket.on('new_rss', function (data) {
         const postList = document.getElementById('post-list');
         const newItem = document.createElement('div');
         newItem.className = 'post-item p-4';

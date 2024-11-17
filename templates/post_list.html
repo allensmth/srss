@@ -1,15 +1,16 @@
- {% for item in rss_items %}
-        
-        <div class="post-item bg-white p-4 ">
-            <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center space-x-2">
-                    <span class="tag">{{ item.author }}</span>
-                <span class="text-sm text-base-content/70">{{ item.created_at.strftime(' %H:%M / %m-%d') }}</span>
-                </div>
-                <div class="flex space-x-2">
-                    <span class="tag">{{ item.label }}</span>
-                </div>
-            </div>
-            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">{{ item.content | safe}}</p>
-        </div>
+{% for item in rss_items %}
+    <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal">
+        <span class="font-bold">{{ item.author }}</span>
+        {% if item.label == 'idea' %}
+            <span class="icon-idea"></span>
+        {% endif %}
+        <span class="text-sm font-serif">
+            [{% if item.created_at.date() == today %}
+                {{ item.created_at.strftime('%H:%M') }}
+            {% else %}
+                {{ item.created_at.strftime('%m-%d %H:%M') }}
+            {% endif %}]:
+        </span>
+        {{ item.content | safe }}
+    </p>
 {% endfor %}

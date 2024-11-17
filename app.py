@@ -52,20 +52,22 @@ def add_rss():
 
     return jsonify({'message': 'RSS item added successfully'}), 201
 
-@app.route('/filter', methods=['GET'])
+@app.route('/filter', methods=['POST'])
 def search_rss():
-    author = request.args.get('author')
-    if not author:
-        return jsonify({'error': 'Label is required'}), 400
-    if author == 'all':
-        rss_items = RSS.query.all()
-    else: 
-        rss_items = RSS.query.filter_by(author=author).all()
+    author = request.form.get('author')
+    label = request.form.get('label')
+    print(f"Author: {author}, Label: {label}")
+    query = RSS.query
     
-    authors = db.session.query(RSS.author).distinct().all()
-    authors = [author[0] for author in authors]  # 提取作者名
+    if author and author != 'all':
+        query = query.filter_by(author=author)
     
-    return render_template('post_list.html', current_author = author,   rss_items=rss_items, authors=authors)
+    if label:
+        query = query.filter_by(label=label)
+    
+    rss_items = query.all()
+    
+    return render_template('post_list.html', rss_items=rss_items)
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000 , debug=True)
+    socketio.run(app, host="0.0.0.0", port=8080 , debug=True)

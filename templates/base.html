@@ -1,38 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewpoert" content="width=device-width, initial-scale=1.0">
-
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS</title>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-        .post-item:not(:last-child) {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        .tag {
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 9999px;
-            background-color: rgba(0, 0, 0, 0.05);
-            color: rgba(0, 0, 0, 0.6);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .tag:hover, .tag.active {
-            background-color: rgba(0, 0, 0, 0.1);
+            font-family: 'Noto Sans SC','Source Han Sans', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
     </style>
-    <title>RSS</title>
 </head>
 
 <body class="h-full">

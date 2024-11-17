@@ -26,16 +26,16 @@ COPY . .
 RUN npx tailwindcss -i ./static/src/main.css -o ./static/dist/main.css --minify
 
 # 暴露端口
-EXPOSE 5000
+EXPOSE 8080
 
 # 设置环境变量
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+ENV FLASK_RUN_PORT=8080
 
 # 使用非root用户运行应用
 # RUN useradd -m flaskuser
 # USER flaskuser
 
 # 启动命令
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000"]
+CMD ["python3", "app.py"]
