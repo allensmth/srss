@@ -60,4 +60,4 @@ If you no longer wish to receive emails about members-only posts, you can
 unsubscribe
 <https://www.youtube.com/attribution_link?noapp=1&a=Zd4hVQp5bu_pLjxR&u=/email_unsubscribe%3Fuid%3DASnvXvtL1mhr-Vn4LIdgxnSy-zHTgaA81uKpJenjCVEiUCv-zFzucnwKb98m%26action_unsubscribe%3Dmembers_only_posts%26timestamp%3D1730321071%26feature%3Dem-sponsor>.
 '''
-extract_text(cc)
+print(extract_text(cc))
