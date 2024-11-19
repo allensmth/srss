@@ -72,7 +72,7 @@
                     <span class="font-bold">${data.author}</span>
                     ${data.label === 'idea' ? '<span class="icon-idea"></span>' : ''}
                     <span class="text-sm font-serif">
-                        [${new Date(data.created_at).toLocaleDateString() === new Date().toLocaleDateString() ? new Date(data.created_at).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) : new Date(data.created_at).toLocaleDateString([], {month: '2-digit', day: '2-digit'}) + ' ' + new Date(data.created_at).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}]:
+                        [${new Date(data.created_at).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}]
                     </span>
                     ${data.content}
                 `;
