@@ -26,9 +26,15 @@ class RSS(db.Model):
 
 @app.route('/')
 def index():
-    rss_items = RSS.query.all()
+    rss_items = RSS.query.order_by(RSS.created_at.desc()).all()
     authors = db.session.query(RSS.author).distinct().all()
     authors = [author[0] for author in authors]  # 提取作者名
+
+    # 将时间转换为北京时间
+    beijing_tz = timezone('Asia/Shanghai')
+    for item in rss_items:
+        item.created_at = item.created_at.astimezone(beijing_tz)
+
     return render_template('index.html', rss_items=rss_items, authors=authors)
 
 def save_rss(content, author, label, created_at):
@@ -91,7 +97,12 @@ def search_rss():
     if label:
         query = query.filter_by(label=label)
     
-    rss_items = query.all()
+    rss_items = query.order_by(RSS.created_at.desc()).all()
+
+    # 将时间转换为北京时间
+    beijing_tz = timezone('Asia/Shanghai')
+    for item in rss_items:
+        item.created_at = item.created_at.astimezone(beijing_tz)
     
     return render_template('post_list.html', rss_items=rss_items)
 
