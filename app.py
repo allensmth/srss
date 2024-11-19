@@ -61,6 +61,9 @@ def add_rss_form():
     label = request.form.get('label')
     created_at = datetime.utcnow()
     content = extract_text(content)
+    print("content:" + content)
+    if not content:
+        content="empty"
     response, status = save_rss(content, author, label, created_at)
     return jsonify(response), status
 
