@@ -2,8 +2,12 @@ from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, emit
 from datetime import datetime
+from pytz import timezone
 from dotenv import load_dotenv
 import os
+ #这里是引入llm.py中的extract_text函数
+from llm import extract_text
+
 
 load_dotenv()
 
@@ -35,12 +39,16 @@ def save_rss(content, author, label, created_at):
     db.session.add(new_rss)
     db.session.commit()
 
+    # 将时间转换为北京时间
+    beijing_tz = timezone('Asia/Shanghai')
+    created_at_beijing = new_rss.created_at.astimezone(beijing_tz)
+
     socketio.emit('new_rss', {
         'id': new_rss.id,
         'content': new_rss.content,
         'author': new_rss.author,
         'label': new_rss.label,
-        'created_at': new_rss.created_at
+        'created_at': created_at_beijing.strftime('%Y-%m-%d %H:%M:%S')
     })
 
     return {'message': 'RSS item added successfully'}, 201
@@ -52,7 +60,7 @@ def add_rss_form():
     author = request.form.get('author')
     label = request.form.get('label')
     created_at = datetime.utcnow()
-
+    content = extract_text(content)
     response, status = save_rss(content, author, label, created_at)
     return jsonify(response), status
 
