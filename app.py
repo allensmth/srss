@@ -27,16 +27,9 @@ def index():
     authors = [author[0] for author in authors]  # 提取作者名
     return render_template('index.html', rss_items=rss_items, authors=authors)
 
-@app.route('/add_rss', methods=['POST'])
-def add_rss():
-    data = request.get_json()
-    content = data.get('content')
-    author = data.get('author')
-    label = data.get('label')
-    created_at = data.get('created_at', datetime.utcnow())
-
+def save_rss(content, author, label, created_at):
     if not content or not author:
-        return jsonify({'error': 'Content and author are required'}), 400
+        return {'error': 'Content and author are required'}, 400
 
     new_rss = RSS(content=content, author=author, label=label, created_at=created_at)
     db.session.add(new_rss)
@@ -50,7 +43,29 @@ def add_rss():
         'created_at': new_rss.created_at
     })
 
-    return jsonify({'message': 'RSS item added successfully'}), 201
+    return {'message': 'RSS item added successfully'}, 201
+
+
+@app.route('/add_rss_form', methods=['POST'])
+def add_rss_form():
+    content = request.form.get('content')
+    author = request.form.get('author')
+    label = request.form.get('label')
+    created_at = datetime.utcnow()
+
+    response, status = save_rss(content, author, label, created_at)
+    return jsonify(response), status
+
+@app.route('/add_rss', methods=['POST'])
+def add_rss():
+    data = request.get_json()
+    content = data.get('content')
+    author = data.get('author')
+    label = data.get('label')
+    created_at = data.get('created_at', datetime.utcnow())
+
+    response, status = save_rss(content, author, label, created_at)
+    return jsonify(response), status
 
 @app.route('/filter', methods=['POST'])
 def search_rss():
