@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<style>
+    .sticky-tags {
+        position: sticky;
+        top: 0;
+        background-color: white; /* 背景颜色，确保内容在滚动时可见 */
+        z-index: 1000; /* 确保标签在其他内容之上 */
+        padding: 10px 0; /* 添加一些内边距 */
+    }
+/* 使用系统字体作为降级方案 */
+body {
+    font-family: 'Source Han Sans CN', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+    
+    
+</style>
+<div class="container mx-auto p-2 md:p-4">
+    
+        <div class="sticky-tags filter-container px-3 py-2">
+            <div class="flex flex-wrap -mx-1" id="filter-tags">
+                <button class="tagbtn active" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "all"}'>全部</button>
+                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Discussion"}'>讨论</button>
+                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Question"}'>问题</button>
+                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Travel"}'>旅行</button>
+                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Web Dev"}'>Web开发</button>
+                <button class="tagbtn" hx-get="/filter" hx-trigger="click" hx-target="#post-list" hx-swap="innerHTML" hx-vals='{"tag": "Django"}'>Django</button>
+            </div>
+        </div>
+        
+    
+
+    <div id="post-list" class="bg-base-100 rounded-lg overflow-hidden">
+        {% for item in rss_items %}
+        
+        <div class="post-item bg-white p-4 ">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                    <span class="tag">{{ item.author }}</span>
+                <span class="text-sm text-base-content/70">{{ item.created_at.strftime(' %H:%M / %m-%d') }}</span>
+                </div>
+                <div class="flex space-x-2">
+                    <span class="tag">{{ item.label }}</span>
+                </div>
+            </div>
+            <p class="text-sm sm:text-lg md:text-sm lg:text-base font-normal text-gray-700">{{ item.content | safe}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    htmx.onLoad(function() {
+            document.body.addEventListener('htmx:configRequest', (event) => {
+                event.detail.headers['Content-Type'] = 'application/json';
+            });
+
+            document.querySelectorAll('#filter-tags .btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#filter-tags .btn').forEach(b => {
+                        b.classList.remove('btn-active');
+                        b.classList.add('btn-ghost');
+                    });
+                    this.classList.remove('btn-ghost');
+                    this.classList.add('btn-active');
+                });
+            });
+        });
+
+    const socket = io();
+
+    socket.on('new_rss', function(data) {
+        const postList = document.getElementById('post-list');
+        const newItem = document.createElement('div');
+        newItem.className = 'post-item p-4';
+        newItem.innerHTML = `
+         <div class="post-item bg-white p-4 ">
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                    <span class="tag">${data.author}</span>
+                <span class="text-sm text-base-content/70">${data.created_at}</span>
+                </div>
+                <div class="flex space-x-2">
+                    <span class="tag">${data.label}</span>
+                </div>
+            </div>
+            <p class="text-sm sm:text-base md:text-sm lg:text-base font-normal text-gray-700">${data.content}</p>
+        </div>
+        `;
+        postList.prepend(newItem);
+    });
+</script>
+{% endblock content %}
