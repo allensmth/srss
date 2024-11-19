@@ -1,8 +1,10 @@
 #llm.py
 
 import os
-
+from dotenv import load_dotenv
 from groq import Groq
+
+load_dotenv()
 
 llm_client = Groq(
     api_key= os.getenv('LLM_KEY')
