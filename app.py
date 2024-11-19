@@ -35,7 +35,10 @@ def index():
     for item in rss_items:
         item.created_at = item.created_at.astimezone(beijing_tz)
 
-    return render_template('index.html', rss_items=rss_items, authors=authors)
+    # 获取当前北京时间
+    today = datetime.now(beijing_tz)
+
+    return render_template('index.html', rss_items=rss_items, authors=authors, today=today)
 
 def save_rss(content, author, label, created_at):
     if not content or not author:
@@ -98,13 +101,13 @@ def search_rss():
         query = query.filter_by(label=label)
     
     rss_items = query.order_by(RSS.created_at.desc()).all()
-
+    
     # 将时间转换为北京时间
     beijing_tz = timezone('Asia/Shanghai')
     for item in rss_items:
         item.created_at = item.created_at.astimezone(beijing_tz)
-    
-    return render_template('post_list.html', rss_items=rss_items)
+    today = datetime.now(beijing_tz)
+    return render_template('post_list.html', rss_items=rss_items, today=today)
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=8080 , debug=True)
